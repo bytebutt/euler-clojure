@@ -2,4 +2,7 @@
   (:require [project-euler.tools.numbers.fibonacci :as fib]))
 
 (defn solve []
-  (reduce + (filter even? (take-while #(< % 4000000) fib/fibonacci))))
+  (->> fib/fibonacci
+       (take-while #(< % 4000000))
+       (filter even?)
+       (reduce +)))
