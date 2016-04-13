@@ -11,10 +11,10 @@
 (defn primes*
   "Returns an infinite seq of prime numbers. Lazy."
   ([]
-   (cons 2 (lazy-seq (primes* [2] 3))))
+   (lazy-seq (cons 2 (primes* [2] 3))))
   ([primes candidate]
    (if (not-any? #(divisible-by candidate %) primes)
-     (cons candidate (lazy-seq (primes* (cons candidate primes) (+ 2 candidate))))
+     (lazy-seq (cons candidate (primes* (cons candidate primes) (+ 2 candidate))))
      (lazy-seq (primes* primes (+ 2 candidate))))))
 
 (def primes (primes*))

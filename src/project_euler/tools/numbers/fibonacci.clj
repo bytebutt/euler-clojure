@@ -5,6 +5,6 @@
   ([]
    (fibonacci* 0N 1N))
   ([prev n]
-   (cons n (lazy-seq (fibonacci* n (+ prev n))))))
+   (lazy-seq (cons n (fibonacci* n (+ prev n))))))
 
 (def fibonacci (fibonacci*))
