@@ -8,7 +8,7 @@
   "Takes a numeric `month` value between 1 and 12 and shifts the value for use with
   Gauss' day of the week formula."
   [month]
-  (+ 1 (mod (- month 3) 12)))
+  (inc (mod (- month 3) 12)))
 
 (defn shift-year
   "Takes a numeric `year` value and decrements it if `shifted-month` is 11 or 12
@@ -32,25 +32,15 @@
     (mod (+ a b c d e) 7)))
 
 (defn sunday?
-  [year month day]
+  [[year month day]]
   (zero? (day-of-week year month day)))
 
 (def dates
-  (let [years (range 1901 2001)
-        months (range 1 13)]
-    (loop [result []
-           [y & ys] years]
-      (if (nil? y)
-        result
-        (recur (concat result
-                       (reduce (fn [v m]
-                                 (conj v (vector y m 1)))
-                               []
-                               months))
-               ys)))))
+  (for [year (range 1901 2001)
+        month (range 1 13)]
+    [year month 1]))
 
 (defn solve []
   (->> dates
-       (map #(apply sunday? %))
-       (filter true?)
+       (filter sunday?)
        (count)))
