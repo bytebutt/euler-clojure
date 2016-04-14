@@ -5,11 +5,7 @@
 (defn factorial
   "Returns the factorial of the number `n`."
   [n]
-  (loop [product 1N
-         value n]
-    (if (<= value 0)
-      product
-      (recur (* product value) (dec value)))))
+  (reduce * (range 1N (inc n))))
 
 (defn divisors
   "Returns a sorted-set of the divisors of `n` (including 1 and `n`)."
