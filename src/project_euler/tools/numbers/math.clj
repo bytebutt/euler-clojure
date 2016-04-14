@@ -16,3 +16,8 @@
        (filter (complement zero?))
        (cons 1)
        (into (sorted-set))))
+
+(defn pow
+  "Returns a BigInt representation of `a` raised to the power of `b`."
+  [a b]
+  (reduce * (repeat b (bigint a))))
